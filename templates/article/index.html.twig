@@ -1,0 +1,54 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des articles{% endblock %}
+
+{% block body %}
+    <style>
+        .example-wrapper {
+            margin: 1em auto;
+            max-width: 800px;
+            width: 95%;
+            font: 18px/1.5 sans-serif;
+        }
+
+    </style>
+
+    <div class="example-wrapper">
+        <h1>Liste des articles</h1>
+        <h2>Liste des nombres pair</h2>
+        <ul>
+            {% for val in tabNumber %}
+                {% if val is even %}
+                    <li>{{ val }}</li>
+                {% endif %}
+            {% endfor %}
+        </ul>
+        <h2>Liste des nombres impair</h2>
+        <ul>
+            {% for val in tabNumber %}
+                {% if val is odd %}
+                    <li>{{ val }}</li>
+                {% endif %}
+            {% endfor %}
+        </ul>
+        <h2>Premier élément du tableau de string</h2>
+        <p>{{ fruits |first }}</p>
+        <h2>Mon tableau de string</h2>
+        <p>
+            {% for val in fruits %}
+                <span>{{ val |capitalize }}</span>,
+            {% endfor %}
+        </p>
+        <h2>La plus grande valeur du tableau de nombre</h2>
+        <p>     {{ max(tabNumber) }}</p>
+        <h2>Valeur aléatoire du tableau de nombre</h2>
+        <p>{{ random(tabNumber) }}</p>
+        <h2>Date supérieur ou inférieur à aujourd'hui</h2>
+        <p>
+            {% if date(date_jour) < date('+2days') %}
+                 La date est inférieur
+            {% else %}
+                La date est supérieur
+            {% endif %}</p>
+    </div>
+{% endblock %}
