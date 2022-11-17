@@ -2,6 +2,8 @@
 
 namespace App\Controller;
 
+use App\Entity\Article;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
@@ -59,7 +61,22 @@ class ArticleController extends AbstractController
 
     }
 
+    /**
+     * @Route("/article/new", name="newArticle")
+     */
+    public function newArticle(EntityManagerInterface $manager): Response
+    {
+        $article = new Article();
+        $article->setTitre('Troisième   Article');
+        $article->setContenu("Contenu du troisième   article avec du contenu plus long et le mot magique ");
+        $dateTime = new \DateTime("2021-5-27 15:28:00");
+        $article->setDateCreation($dateTime);
 
+        $manager->persist($article);
+        $manager->flush();
+
+        return  new Response("OK");
+    }
 
 
 }
