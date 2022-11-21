@@ -1,14 +1,14 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Description de l'article n° {{ numArticle }}{% endblock %}
+{% block title %} {{ article.titre }} {% endblock %}
 
 {% block body %}
 
 
     <div class="example-wrapper">
-        <h1>Article n° {{ numArticle }} </h1>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus atque deserunt distinctio, in iure labore
-            minima quasi repellat tempora voluptatibus?
+        <h1> {{ article.titre }} </h1>
+        <p><small>Article n°{{ article.id }} écrit le {{ article.dateCreation | date('d-m-Y') }}</small></p>
+        <p>{{ article.contenu }}
         </p>
         <div id="votes">
             <p>Votez pour cet article : <button data-vote="add" class="vote"> + </button> <button data-vote="remove" class="vote"> - </button></p>

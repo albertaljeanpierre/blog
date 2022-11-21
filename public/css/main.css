@@ -1,6 +1,21 @@
 body {
     background: blanchedalmond;
 }
+
+/* reset */
+ul {
+    list-style-type: none;
+}
+a {
+    color: #000;
+    text-decoration: none;
+}
+a:hover {
+    text-decoration: underline;
+}
+/* FIN reset */
+
+
 .example-wrapper {
     margin: 1em auto;
     max-width: 800px;

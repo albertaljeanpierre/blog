@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Article;
+use App\Repository\ArticleRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -12,12 +13,12 @@ use Symfony\Component\Routing\Annotation\Route;
 class ArticleController extends AbstractController
 {
     /**
-     * @Route("/article", name="app_article")
+     * @Route("/twig", name="app_article")
      */
     public function index(): Response
     {
         $tabNumber = [3, 5, 6, 18, 19, 20];
-        $fruit = ['pomme', 'poire' , 'kiwi'];
+        $fruit = ['pomme', 'poire', 'kiwi'];
         $date = date('Y-m-d');  // date du jour
 
 
@@ -32,12 +33,16 @@ class ArticleController extends AbstractController
     /**
      * @Route("/article/{numero<\d+>?1}", name="afficher_article" )
      */
-    public function afficher_article(int $numero): Response
+    public function afficher_article(int $numero, ArticleRepository $articleRepository): Response
     {
-
+        $article = $articleRepository->find($numero);
+        if (is_null($article)) {
+            $article = $articleRepository->find('1');
+        }
         return $this->render('article/article.html.twig', [
-            'numArticle' => $numero
+            'article' => $article
         ]);
+
     }
 
 
@@ -50,7 +55,7 @@ class ArticleController extends AbstractController
     {
         if ($action === "add") {
             $retour = rand(0, 10);
-        } elseif ($action === "remove" ) {
+        } elseif ($action === "remove") {
             $retour = rand(11, 50);
         } else {
             // Renvoyer une erreur
@@ -67,16 +72,29 @@ class ArticleController extends AbstractController
     public function newArticle(EntityManagerInterface $manager): Response
     {
         $article = new Article();
-        $article->setTitre('Troisième   Article');
-        $article->setContenu("Contenu du troisième   article avec du contenu plus long et le mot magique ");
+        $article->setTitre('Quatrième   Article');
+        $article->setContenu("Contenu du Quatrième   article  ");
         $dateTime = new \DateTime("2021-5-27 15:28:00");
         $article->setDateCreation($dateTime);
 
         $manager->persist($article);
         $manager->flush();
 
-        return  new Response("OK");
+        return new Response("OK");
     }
 
+    /**
+     * @Route("/blog", name="blog")
+     * @return Response
+     */
+    public function blog(ArticleRepository $articleRepository): Response
+    {
+        $listArticle = $articleRepository->findAll();
 
+
+        return $this->render('article/blog.html.twig', [
+            'listeArticle' => $listArticle,
+
+        ]);
+    }
 }
