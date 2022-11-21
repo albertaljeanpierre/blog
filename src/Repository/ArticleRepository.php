@@ -63,4 +63,20 @@ class ArticleRepository extends ServiceEntityRepository
 //            ->getOneOrNullResult()
 //        ;
 //    }
+
+
+    /**
+     * @return Article[] Returns an array of Article objects
+     */
+    public function findByMagique($value = "magique"): array
+    {
+        return $this->createQueryBuilder('article')
+            ->Where('article.contenu like :val')
+            ->setParameter('val', "%$value%")
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
+
 }

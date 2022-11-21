@@ -72,8 +72,8 @@ class ArticleController extends AbstractController
     public function newArticle(EntityManagerInterface $manager): Response
     {
         $article = new Article();
-        $article->setTitre('Quatrième   Article');
-        $article->setContenu("Contenu du Quatrième   article  ");
+        $article->setTitre('Cinquième  Article');
+        $article->setContenu("Contenu du Cinquième article Symfony c'est magique  ");
         $dateTime = new \DateTime("2021-5-27 15:28:00");
         $article->setDateCreation($dateTime);
 
@@ -97,4 +97,21 @@ class ArticleController extends AbstractController
 
         ]);
     }
+
+    /**
+     * @Route("/article/magique", name="search_magique")
+     * @return Response
+     */
+    public function search_magique(ArticleRepository $articleRepository): Response
+    {
+        $articlesTrouve = $articleRepository->findByMagique();
+
+
+        return $this->render('article/recherche.html.twig', [
+            'listeArticle' => $articlesTrouve,
+
+        ]);
+    }
+
+
 }
