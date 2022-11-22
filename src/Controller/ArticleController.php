@@ -36,9 +36,9 @@ class ArticleController extends AbstractController
     public function afficher_article(int $numero, ArticleRepository $articleRepository): Response
     {
         $article = $articleRepository->find($numero);
-        if (is_null($article)) {
-            $article = $articleRepository->find('1');
-        }
+//        if (is_null($article)) {
+//            $article = $articleRepository->find('1');
+//        }
         return $this->render('article/article.html.twig', [
             'article' => $article
         ]);

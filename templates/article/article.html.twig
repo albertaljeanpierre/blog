@@ -1,19 +1,35 @@
 {% extends 'base.html.twig' %}
 
-{% block title %} {{ article.titre }} {% endblock %}
+{% block title %}
+    {% if  article is null %}
+        Cet article n'existe pas!
+    {% else %}
+        {{ article.titre }}
+    {% endif %}
+
+
+{% endblock %}
 
 {% block body %}
 
 
     <div class="example-wrapper">
-        <h1> {{ article.titre }} </h1>
-        <p><small>Article n°{{ article.id }} écrit le {{ article.dateCreation | date('d-m-Y') }}</small></p>
-        <p>{{ article.contenu }}
-        </p>
-        <div id="votes">
-            <p>Votez pour cet article : <button data-vote="add" class="vote"> + </button> <button data-vote="remove" class="vote"> - </button></p>
-            <p>Votes pour cet article <span id="nbVotes"></span></p>
-        </div>
+        {% if  article is null %}
+            Cet article n'existe pas!
+        {% else %}
+            <h1> {{ article.titre }} </h1>
+            <p><small>Article n°{{ article.id }} écrit le {{ article.dateCreation | date('d-m-Y') }}</small></p>
+            <p>{{ article.contenu }}
+            </p>
+            <div id="votes">
+                <p>Votez pour cet article : <button data-vote="add" class="vote"> + </button> <button data-vote="remove" class="vote"> - </button></p>
+                <p>Votes pour cet article <span id="nbVotes"></span></p>
+            </div>
+        {% endif %}
+
+
+
+
 
     </div>
     {% block jquery  %}
