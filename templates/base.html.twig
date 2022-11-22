@@ -18,6 +18,7 @@
 <body>
         {% block navigation %}
                 <ul class="menu-navigation">
+                    <li><a href="{{ path('app_home') }}" >Home</a></li>
                     <li><a href="{{ path('app_article') }}" >Page test Twig</a></li>
                     <li><a href="{{ path('afficher_article' , { 'numero' : '3'  }) }}" >Article 3</a></li>
                     <li><a href="{{ path('blog' ) }}" >Blog</a></li>

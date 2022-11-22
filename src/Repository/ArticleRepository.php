@@ -77,6 +77,17 @@ class ArticleRepository extends ServiceEntityRepository
             ->getResult()
         ;
     }
-
+    /**
+     * @return Article[] Returns an array of Article objects
+     */
+    public function findByAnnee($value): array
+    {
+        return $this->createQueryBuilder('article')
+            ->Where('article.dateCreation like :val')
+            ->setParameter('val', "%$value%")
+            ->getQuery()
+            ->getResult()
+            ;
+    }
 
 }

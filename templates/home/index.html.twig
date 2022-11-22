@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello {% endblock %}
+
+{% block body %}
+
+
+<div class="example-wrapper">
+    <h1>Hello </h1>
+    <p>Recherche par année :
+        <a href="{{ path('search_annee' , { 'annee' : '2015'  }) }}">2015</a>,
+        <a href="{{ path('search_annee' , { 'annee' : '2018'  }) }}">2018</a>,
+        <a href="{{ path('search_annee' , { 'annee' : '2021'  }) }}">2021</a>,
+    </p>
+
+
+</div>
+{% endblock %}

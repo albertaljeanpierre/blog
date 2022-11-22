@@ -113,5 +113,18 @@ class ArticleController extends AbstractController
         ]);
     }
 
+    /**
+     * @Route("/article/annee/{annee}", name="search_annee")
+     * @param int $annee l'année de recherche
+     * @param ArticleRepository $articleRepository
+     * @return Response
+     */
+    public function search_annee( int $annee, ArticleRepository $articleRepository): Response
+    {
+        $articlesTrouve = $articleRepository->findByAnnee($annee);
 
+        return $this->render('article/recherche.html.twig', [
+            'listeArticle' => $articlesTrouve,
+        ]);
+    }
 }
