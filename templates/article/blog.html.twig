@@ -11,7 +11,7 @@
         <ul>
             {% for article in listeArticle %}
 
-                    <li><a href="{{ path('afficher_article', {numero: article.id}) }}">{{ article.titre }}</a>   </li>
+                    <li><a href="{{ path('afficher_article', {id: article.id}) }}">{{ article.titre }}</a>   </li>
 
             {% endfor %}
         </ul>

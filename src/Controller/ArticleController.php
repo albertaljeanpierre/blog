@@ -31,11 +31,11 @@ class ArticleController extends AbstractController
     }
 
     /**
-     * @Route("/article/{numero<\d+>?1}", name="afficher_article" )
+     * @Route("/article/{id<\d+>?1}", name="afficher_article" )
      */
-    public function afficher_article(int $numero, ArticleRepository $articleRepository): Response
+    public function afficher_article(Article $article): Response
     {
-        $article = $articleRepository->find($numero);
+//        $article = $articleRepository->find($numero);
 //        if (is_null($article)) {
 //            $article = $articleRepository->find('1');
 //        }
