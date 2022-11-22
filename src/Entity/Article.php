@@ -32,6 +32,11 @@ class Article
      */
     private $dateCreation;
 
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $votes = 0;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -69,6 +74,24 @@ class Article
     public function setDateCreation(\DateTimeInterface $dateCreation): self
     {
         $this->dateCreation = $dateCreation;
+
+        return $this;
+    }
+
+    public function getVotes(): ?int
+    {
+        return $this->votes;
+    }
+
+    public function getVotesString(): string
+    {
+        $prefix = $this->getVotes() >=0 ? '+' : '-';
+        return sprintf('%s %d', $prefix, abs($this->getVotes()));
+    }
+
+    public function setVotes(int $votes): self
+    {
+        $this->votes = $votes;
 
         return $this;
     }
