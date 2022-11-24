@@ -37,6 +37,12 @@ class Article
      */
     private $votes = 0;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Categorie::class, inversedBy="categorie")
+     * @ORM\JoinColumn(nullable=true)
+     */
+    private $categorie;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -92,6 +98,18 @@ class Article
     public function setVotes(int $votes): self
     {
         $this->votes = $votes;
+
+        return $this;
+    }
+
+    public function getCategorie(): ?Categorie
+    {
+        return $this->categorie;
+    }
+
+    public function setCategorie(?Categorie $categorie): self
+    {
+        $this->categorie = $categorie;
 
         return $this;
     }
